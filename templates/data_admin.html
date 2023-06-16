@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Context_Data Admin {% end-block %}
+
+
+
+{% block body %}
+  <div class="container">
+       <table class="table table-success table-striped table-hover" border="1">
+         <thead>
+          <tr>
+            <th>ID</th>
+            <th>Question</th>
+            <th>Answer</th>
+            <th>Department</th>
+          </tr>
+         </thead>
+         <tbody>
+          {% for epoint_data in epoint_datas %}
+            <tr>
+              <td>{{epoint_data.id}}</td>
+              <td>{{epoint_data.question}}</td>
+              <td>{{epoint_data.answer}}</td>
+              <td>{{epoint_data.department}}</td>
+              <td>
+                  <a href="" clas="btn btn-success"> Update</a>
+                  <a href="" clas="btn btn-danger"> Delete</a>
+              </td>
+            </tr>
+         </tbody>
+       </table>
+  </div>
+
+{% end-block %}
+
