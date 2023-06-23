@@ -1,9 +1,29 @@
+# This is a sample Python script.
+
+# Press Shift+F10 to execute it or replace it with your code.
+# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
+
+def print_hi(name):
+    # Use a breakpoint in the code line below to debug your script.
+    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    print_hi('PyCharm')
+
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
+
+
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.mysql import LONGTEXT
 
-import tkinter
-from tkinter import ttk, messagebox
+# import tkinter
+# from tkinter import ttk, messagebox
 
 from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper, \
     ServiceContext
@@ -36,51 +56,10 @@ class epoint_data(db.Model):
 @app.route('/')
 
 def index():
-    epoint_datas = epoint_data.query.all()
-    return render_template('index.html', epoint_datas=epoint_datas)
+    return render_template('index2.html')
+#    epoint_datas = epoint_data.query.all()
+#    return render_template('index.html', epoint_datas=epoint_datas)
 
-def construct_index(directory_path):
-    # set maximum input size
-    max_input_size = 4096
-    # set number of output tokens
-    num_outputs = 2000
-    # set maximum chunk overlap
-    max_chunk_overlap = 20
-    # set chunk size limit
-    chunk_size_limit = 600
-
-    # define prompt helper
-    prompt_helper = PromptHelper(max_input_size, num_outputs, max_chunk_overlap, chunk_size_limit=chunk_size_limit)
-
-    # define LLM
-    llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.5, model_name="text-davinci-003", max_tokens=num_outputs))
-
-    documents = SimpleDirectoryReader(directory_path).load_data()
-
-    service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper)
-    index = GPTSimpleVectorIndex.from_documents(documents, service_context=service_context)
-
-    index.save_to_disk('index.json')
-
-    return index
-
-
-def ask_ai():
-    secret_key = openai_secret_key_entry.get()
-    os.environ["OPENAI_API_KEY"] = secret_key
-    os.environ["OPENAI_API_KEY"] = "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"
-    construct_index("context_data/data")
-
-    index = GPTSimpleVectorIndex.load_from_disk('index.json')
-    query = Question_entry.get()
-
-    while True:
-        # query = input("What do you want to ask? ")
-        response = index.query(query)
-        # display(Markdown(f"Response: <b>{response.response}</b>"))
-        # print(response.response)
-        tkinter.messagebox.showwarning("EPoint AI Chat bot Answer", message=response.response)
-        break
 
 
 if __name__ == "__main__":
