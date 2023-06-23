@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expend-lg navbar-light bg-light">
+     <div class="container">
+       <a class="navbar-brand" href="">
+           <img scr="{{url_for('static', filename='eslogo.png')}}" width="100" height="50" class="d-inline-block alight-text-top">
+       </a>
+       <ul class="navbar-nav">
+            <li class="nav-item">
+<!--                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insert_question">Add Question</button>-->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insert_question" >Send your new question</button>
+            </li>
+       </ul>
+     </div>
+</nav>
+
+ <div class="modal fade" id="insert_question" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Send your new question.</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="form-floating">
+                <select id="department-text" class="form-select" required="1">
+                    <option selected>Choose...</option>
+                    <option>Admin</option>
+                    <option>After Sales</option>
+                    <option>CST</option>
+                    <option>PDT</option>
+                    <option>Sales</option>
+                </select>
+                <label for="department-text" class="col-form-label">Pick a department:</label>
+            </div>
+
+            <div class="mb-3">
+                <label for="question-text" class="col-form-label">Question:</label>
+                <textarea class="form-control" name="question" id="question-text" required="1"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="answer-text" class="col-form-label">Answer:</label>
+                <textarea class="form-control" name="answer" id="answer-text"></textarea>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div id="insert_question" class="modal fade" role="dialog">-->
+<!--    <div class="modal=dialog">-->
+<!--        <div class="modal-content"><-->
+<!--            <div class="modal-header"><-->
+<!--                <h4 class="modal-title">Add Question</h4>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+
+<!--                <form action="" method="POST">-->
+
+<!--                    <div action="form-group">-->
+<!--                        <label>Question:</label>-->
+<!--                        <input type="text" class="form-control" name="title" required="1">-->
+<!--                    </div>-->
+
+<!--                    <div action="form-group">-->
+<!--                        <label>Answer:</label>-->
+<!--                        <input type="text" class="form-control" name="title" required="1">-->
+<!--                    </div>-->
+
+
+<!--                    <div action="form-group">-->
+<!--                        <button class="btn btn-primary mt-4" type="submit">Add Question</button>-->
+<!--                    </div>-->
+
+<!--                </form>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
