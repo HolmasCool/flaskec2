@@ -57,6 +57,7 @@ class epoint_data(db.Model):
 
 def index():
     return render_template('index2.html')
+#zhiming
 #    epoint_datas = epoint_data.query.all()
 #    return render_template('index.html', epoint_datas=epoint_datas)
 
