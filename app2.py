@@ -20,7 +20,7 @@ app.config['SQLACHEMY_TRACK_MODIFICATION'] = False
 db = SQLAlchemy(app)
 
 
-class epointdata(db.Model):
+class EpointData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(LONGTEXT, nullable=False)
     answer = db.Column(LONGTEXT, nullable=False)
@@ -34,7 +34,7 @@ class epointdata(db.Model):
 
 @app.route('/')
 def index():
-    epoint_datas = epointdata.query.all()
+    epoint_datas = EpointData.query.all()
     return render_template('index.html', epoint_datas=epoint_datas)
 
 
