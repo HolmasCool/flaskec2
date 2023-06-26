@@ -1,15 +1,14 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.mysql import LONGTEXT
-
-# import tkinter
-# from tkinter import ttk, messagebox
-
 from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper, \
     ServiceContext
 from langchain import OpenAI
-import sys
 import os
+#import sys
+# import tkinter
+# from tkinter import ttk, messagebox
+
 from IPython.display import Markdown, display
 
 app = Flask(__name__)
