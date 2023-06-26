@@ -34,9 +34,9 @@ class EpointData(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-#    epoint_datas = EpointData.query.all()
-#    return render_template('index.html', epoint_datas=epoint_datas)
+#    return render_template('index.html')
+    epoint_datas = EpointData.query.all()
+    return render_template('index.html', epoint_datas=epoint_datas)
 
 
 if __name__ == "__main__":
