@@ -1,15 +1,15 @@
-from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.dialects.mysql import LONGTEXT
 from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper, \
     ServiceContext
 from langchain import OpenAI
 import os
-#import sys
+# import sys
 # import tkinter
 # from tkinter import ttk, messagebox
+# from IPython.display import Markdown, display
 
-from IPython.display import Markdown, display
+from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.mysql import LONGTEXT
 
 app = Flask(__name__)
 
@@ -19,24 +19,24 @@ app.config[
 app.config['SQLACHEMY_TRACK_MODIFICATION'] = False
 db = SQLAlchemy(app)
 
-class epoint_data(db.Model):
-    # __bind_key__ = "auth"
+
+class epointdata(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(LONGTEXT, nullable=False)
     answer = db.Column(LONGTEXT, nullable=False)
     department = db.Column(db.String(100), nullable=False)
-    # timestamp = db.Column(db.TIMESTAMP(), nullable=False)
 
     def __init__(self, question, answer, department):
         self.question = question
         self.answer = answer
         self.department = department
 
-@app.route('/')
 
+@app.route('/')
 def index():
-    epoint_datas = epoint_data.query.all()
+    epoint_datas = epointdata.query.all()
     return render_template('index.html', epoint_datas=epoint_datas)
+
 
 def construct_index(directory_path):
     # set maximum input size
