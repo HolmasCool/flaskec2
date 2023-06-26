@@ -6,9 +6,22 @@
 {% block body %}
 <!--<button onclick="myFunction()">Toggle white mode</button>-->
 <!--<a href="/data_admin.html">Check Out This Form!</a>-->
+
+
 <div class="container mt-4">
-<h1>Welcome to Epoint AI Chat, I am AI Elien! </h1>
-<p>Please ask your question in below, I will try my best to answer your question.</p>
+    <h1>Welcome to Epoint AI Chat, I am AI Elien! </h1>
+    <p>Please ask your question in below, I will try my best to answer your question.</p>
+
+    <div class="mb-4">
+        <label for="question-text" class="col-form-label">Please ask your question in below:</label>
+        <textarea class="form-control" name="question" id="question-text" required="1"></textarea>
+        <button type="button" class="btn btn-primary">Send</button>
+    </div>
+    <div class="mb-3">
+        <label for="answer-text" class="col-form-label">Answer:</label>
+        <textarea class="form-control" name="Epoint AI answer in below" id="answer-text"></textarea>
+    </div>
+
     <table class="table table-success table-striped table-hover" border="1">
         <thead>
         <tr>
