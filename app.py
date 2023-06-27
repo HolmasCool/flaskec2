@@ -108,7 +108,7 @@ def construct_index(directory_path):
 def ask_ai(question):
     #secret_key = openai_secret_key_entry.get()
     #os.environ["OPENAI_API_KEY"] = secret_key
-    os.environ["OPENAI_API_KEY"] = "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"
+    os.environ["OPENAI_API_KEY"] = "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"
     construct_index("context_data/data")
 
     index = GPTSimpleVectorIndex.load_from_disk('index.json')
