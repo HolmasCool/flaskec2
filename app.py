@@ -58,7 +58,7 @@ def index():
     return render_template('index.html', epoint_datas=epoint_datas)
 
 
-@app.route('/add/', methods =['POST'])
+@app.route('/add/', methods=['POST'])
 def send_question():
     if request.method == "POST":
         question = request.form.get('question')
@@ -69,19 +69,13 @@ def send_question():
         if department is None:
             department = ''
 
-
-        # epointData = EpointData(
-        #     question=request.form.get('question'),
-        #     answer=request.form.get('answer'),
-        #     department=request.form.get('Question')
-        # )
-        openaianswer =ask_ai(question)
+        openaianswer = ask_ai(question)
 
     epointData = EpointData(question, answer, department)
     db.session.add(epointData)
     db.session.commit()
-#    flask("Book added successful")
-#    return redirect(url_for('index'), openaianswer=openaianswer)
+    #    flask("Book added successful")
+    #    return redirect(url_for('index'), openaianswer=openaianswer)
     return render_template('index.html', openaianswer=openaianswer)
 
 
