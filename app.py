@@ -1,25 +1,39 @@
-from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper,ServiceContext
+from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor,\
+    PromptHelper, ServiceContext
 from langchain import OpenAI
+from pathlib import Path
+from dotenv import load_dotenv
 import os
 # import sys
 # import tkinter
 # from tkinter import ttk, messagebox
 # from IPython.display import Markdown, display
+# from datetime import timedelta
 
 from flask import Flask, render_template, request, redirect, url_for
-    # , flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.mysql import LONGTEXT
+
+# env_path = Path('.', '.env')
+# load_dotenv(dotenv_path='\vevn\.env')
+load_dotenv()
 
 app = Flask(__name__)
 
 app.config[
-    'SQLALCHEMY_DATABASE_URI'] = 'mysql://epointadmin:200200170hH@epointaichat.cb1yssr93nnk.ap-southeast-1.rds' \
+    'SQLALCHEMY_DATABASE_URI'] = 'mysql://'+os.getenv('SQLUSERNAME')+':'+os.getenv('SQLPASSWORD')+'@'+\
+                                 os.getenv('SQLSERVER')+'.cb1yssr93nnk.ap-southeast-1.rds' \
                                  '.amazonaws.com/EpointContext'
-app.config['SQLACHEMY_TRACK_MODIFICATION'] = False
+
+# app.config[
+#     'SQLALCHEMY_DATABASE_URI'] = 'mysql://epointadmin:200200170hH@epointaichat.cb1yssr93nnk.ap-southeast-1.rds' \
+#                                  '.amazonaws.com/EpointContext'
+
+app.config['SQLACHEMY_TRACK_MODIFICATION'] = os.getenv("SQLACHEMY_TRACK_MODIFICATION")
+db = SQLAlchemy(app)
+
 # app.secret_key = "somethingsunique"
 
-db = SQLAlchemy(app)
 
 
 class EpointData(db.Model):
@@ -108,7 +122,7 @@ def construct_index(directory_path):
 def ask_ai(question):
     #secret_key = openai_secret_key_entry.get()
     #os.environ["OPENAI_API_KEY"] = secret_key
-    os.environ["OPENAI_API_KEY"] = "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"
+    os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
     construct_index("context_data/data")
 
     index = GPTSimpleVectorIndex.load_from_disk('index.json')
