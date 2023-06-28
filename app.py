@@ -34,8 +34,6 @@ db = SQLAlchemy(app)
 
 # app.secret_key = "somethingsunique"
 
-
-
 class EpointData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(LONGTEXT, nullable=False)
