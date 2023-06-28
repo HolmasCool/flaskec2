@@ -29,6 +29,7 @@ app.config[
 #     'SQLALCHEMY_DATABASE_URI'] = 'mysql://epointadmin:200200170hH@epointaichat.cb1yssr93nnk.ap-southeast-1.rds' \
 #                                  '.amazonaws.com/EpointContext'
 
+
 app.config['SQLACHEMY_TRACK_MODIFICATION'] = os.getenv("SQLACHEMY_TRACK_MODIFICATION")
 db = SQLAlchemy(app)
 
