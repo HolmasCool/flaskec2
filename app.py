@@ -30,6 +30,7 @@ app.config[
 #                                  '.amazonaws.com/EpointContext'
 
 
+
 app.config['SQLACHEMY_TRACK_MODIFICATION'] = os.getenv("SQLACHEMY_TRACK_MODIFICATION")
 db = SQLAlchemy(app)
 
