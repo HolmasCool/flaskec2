@@ -48,9 +48,13 @@ class EpointData(db.Model):
 
 
 @app.route('/')
-def index(openaianswer='', openaiquestion='', epoint_datas=''):
+def index():
     openaianswer = request.args.get('openaianswer')
     openaiquestion = request.args.get('openaiquestion')
+    if openaianswer is None:
+        openaianswer = ''
+    if openaiquestion is None:
+        openaiquestion = ''
     epoint_datas = EpointData.query.filter(EpointData.department != 'Question').all()
     return render_template('index.html', openaianswer=openaianswer, openaiquestion=openaiquestion, epoint_datas=epoint_datas)
 
@@ -95,6 +99,7 @@ def insert_question():
         answer = request.form.get('answer')
         if answer is None:
             answer = ''
+
         if department is None:
             department = 'Question'
             answer = ''
