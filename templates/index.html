@@ -5,7 +5,7 @@
 
 {% block body %}
 
-<form action="{{url_for('send_question')}}" method="POST">
+<form action="{{url_for('insert_question')}}" method="POST">
     <div class="container mt-4">
 
         <h1>Welcome to Epoint AI Chat, I am AI Elien! </h1>
@@ -13,12 +13,13 @@
 
         <div class="mb-4">
             <label for="question-text" class="col-form-label">Please ask your question in below:</label>
-            <textarea class="form-control" name="question" id="question-text" required="1"></textarea>
-            <button type="submit" class="btn btn-primary">Send</button>
+            <textarea class="form-control" name="question" id="question-text" required="1">{{openaiquestion}}</textarea>
+            <p></p>
+            <button type="submit" class="btn btn-primary">Hi Dear, Elien here click me here to get your answer ('',)</button>
         </div>
         <div class="mb-3">
             <label for="answer-text" class="col-form-label">Answer:</label>
-            <textarea class="form-control" name="Epoint AI answer in below" id="answer-text">{{openaianswer}}</textarea>
+            <textarea class="form-control" name="answer" id="answer-text">{{openaianswer}}</textarea>
         </div>
 
         <table class="table table-success table-striped table-hover" border="1">
@@ -28,7 +29,6 @@
                 <th>Question</th>
                 <th>Answer</th>
                 <th>Department</th>
-                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -38,11 +38,6 @@
                 <td>{{epoint_data.question}}</td>
                 <td>{{epoint_data.answer}}</td>
                 <td>{{epoint_data.department}}</td>
-                <td>
-                    <a href="" class="btn btn-success"> Update</a>
-                    <a href="{{url_for('delete_epointdata', id=epoint_data.id)}}" class="btn btn-danger"> Delete</a>
-                </td>
-            </tr>
             {% endfor %}
             </tbody>
         </table>
