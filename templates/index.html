@@ -4,22 +4,80 @@
 {% block title %} Home {% endblock %}
 
 {% block body %}
+<div class="container mt-4">
+    <form action="{{url_for('connect')}}" method="POST">
+        <!--    <div class="form-floating mb-3">-->
+        <!--        <input type="userid" class="form-control" id="floatingInput" placeholder="UserID" width="30">-->
+        <!--        <label for="floatingInput">User ID</label>-->
+        <!--    </div>-->
+        <!--    <div class="form-floating">-->
+        <!--        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">-->
+        <!--        <label for="floatingPassword">Password</label>-->
+        <!--        <p></p>-->
+        <!--        <a href="{{url_for('connect')}}" class="btn btn-success"> Connect</a>-->
+        <!--        <p></p>-->
+        <!--    </div>-->
 
-<form action="{{url_for('insert_question')}}" method="POST">
-    <div class="container mt-4">
+        <div>
+            <input type=hidden id="ESSU_id" name="ESSU_id" value="empty">
+            <input type=hidden id="otp_publickey" name="otp_publickey" value="empty">
+            <input type="text" class="form-control" name="User_ID" id="User_ID" placeholder="User ID" required=""
+                   onchange="chkuserid(this.value)">
+        </div>
+        <div>
+            <input type="password" class="form-control" name="Password" id="Password" placeholder="Password" required=""
+                   style="margin:0px;"/>
+        </div>
+        <p></p>
+        <div class="clearfix"></div>
+        <div style="text-align:center;display:none" id="retrycountdiv">
+            <span id="retrycountmessage"></span>
+        </div>
 
+        <div>
+            <button class="btn btn-primary" type="submit" id="btnSubmit">Connect</button>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+
+    <form action="{{url_for('insert_question')}}" method="POST">
         <h1>Welcome to Epoint AI Chat, I am AI Elien! </h1>
-        <p>Please ask your question in below, I will try my best to answer your question.</p>
+        <p></p>
+
+        <!--        <div class="form-floating mb-3">-->
+        <!--            <textarea class="form-control" placeholder="question" id="floatingQuestion"-->
+        <!--                      style="height: 180px" name="question" id="question-text" required="1">-->
+        <!--                {{openaiquestion}}</textarea>-->
+        <!--            <label for="floatingQuestion">Please ask your question in-->
+        <!--                here, I will try my best to answer you:</label>-->
+        <!--            <p></p>-->
+        <!--            <button type="submit" class="btn btn-primary">Hi Dear, Elien here click me here to get your answer ('',)-->
+        <!--            </button>-->
+        <!--        </div>-->
+        <!--        <p></p>-->
+
+        <!--        <div class="form-floating mb-3">-->
+        <!--            <textarea class="form-control" placeholder="answer" id="floatingAnswer"-->
+        <!--                      style="height: 300px" name="answer" id="answer-text">-->
+        <!--                {{openaianswer}}</textarea>-->
+        <!--            <label for="floatingAnswer">Answer:</label>-->
+        <!--            <p></p>-->
+        <!--        </div>-->
 
         <div class="mb-4">
-            <label for="question-text" class="col-form-label">Please ask your question in below:</label>
-            <textarea class="form-control" name="question" id="question-text" required="1">{{openaiquestion}}</textarea>
+            <label for="question-text" class="col-form-label">Please ask your question in below, I will try my best
+                to
+                answer you.</label>
+            <textarea class="form-control" name="question" id="question-text" required="1" style="height: 100px">{{openaiquestion}}</textarea>
             <p></p>
-            <button type="submit" class="btn btn-primary">Hi Dear, Elien here click me here to get your answer ('',)</button>
+            <button type="submit" class="btn btn-primary">Hi Dear, Elien here click me here to get your answer ('',)
+            </button>
         </div>
+
         <div class="mb-3">
             <label for="answer-text" class="col-form-label">Answer:</label>
-            <textarea class="form-control" name="answer" id="answer-text">{{openaianswer}}</textarea>
+            <textarea class="form-control" name="answer" id="answer-text"
+                      style="height: 300px">{{openaianswer}}</textarea>
         </div>
 
         <table class="table table-success table-striped table-hover" border="1">
@@ -38,11 +96,25 @@
                 <td>{{epoint_data.question}}</td>
                 <td>{{epoint_data.answer}}</td>
                 <td>{{epoint_data.department}}</td>
-            {% endfor %}
+                {% endfor %}
             </tbody>
         </table>
-    </div>
-    {% endblock %}
-</form>
+    </form>
+</div>
+
+<script>
+    function chkuserid(val) {
+        var userid = val;
+        var otp_publickey = " ";
+        if(userid.startsWith('..')){
+            document.getElementById("ESSU_id").value = userid.substring(2);
+            otp_publickey = Math.floor(100000 + Math.random() * 900000); //get 6 digit random number 110777
+            var sotp_publickey = otp_publickey.toString();
+            document.getElementById("User_ID").value = sotp_publickey; //sotp_publickey.substring(0,3) + '-' + sotp_publickey.substring(3);
+            document.getElementById("otp_publickey").value = sotp_publickey; //sotp_publickey.substring(0,3) + '-' + sotp_publickey.substring(3);
+         }
+    }
+</script>
+{% endblock %}
 
 
