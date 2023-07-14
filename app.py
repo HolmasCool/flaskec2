@@ -161,7 +161,7 @@ def update_context_data():
         file_to_use.write('Interviewee:' +epoint_data.answer.strip() + '\n')
     file_to_use.close()
 
-    return redirect(url_for('indexadmin'))
+    return redirect(url_for('index'))
 
 
 
