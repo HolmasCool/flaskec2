@@ -16,6 +16,7 @@ import datetime
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.mysql import LONGTEXT
+from sqlalchemy import text
 
 # env_path = Path('.', '.env')
 # load_dotenv(dotenv_path='\vevn\.env')
@@ -59,7 +60,8 @@ def index():
         openaianswer = ''
     if openaiquestion is None:
         openaiquestion = ''
-    epoint_datas = EpointData.query.filter(EpointData.department != 'Question').all()
+    epoint_datas = EpointData.query.filter(EpointData.department != 'Question').order_by(text("-id"))
+
     return render_template('index.html', openaianswer=openaianswer, openaiquestion=openaiquestion, epoint_datas=epoint_datas)
 
 
@@ -141,7 +143,8 @@ def connect():
 
 @app.route('/indexadmin/', methods=['GET'])
 def indexadmin():
-    epoint_datas = EpointData.query.all()
+    # epoint_datas = EpointData.query.all()
+    epoint_datas = EpointData.query.filter().order_by(text("-id"))
     return render_template('indexadmin.html', epoint_datas=epoint_datas, indicator='Admin')
 
 
@@ -154,7 +157,8 @@ def delete_epointdata_indexadmin():
 @app.route('/Update/', methods=['GET'])
 def update_context_data():
     file_to_use = open('context_data/data/epoint_data.txt', 'w+')
-    epoint_datas = EpointData.query.filter(EpointData.department != 'Question').all()
+    # epoint_datas = EpointData.query.filter(EpointData.department != 'Question').all()
+    epoint_datas = EpointData.query.filter(EpointData.department != 'Question').order_by(text("-id"))
 
     for epoint_data in epoint_datas :
         file_to_use.write('Interviewer:'+epoint_data.question.strip() + '\n')
@@ -192,7 +196,8 @@ def insert_question():
     epointData = EpointData(question, answer, department)
     db.session.add(epointData)
     db.session.commit()
-    epoint_datas = EpointData.query.filter_by(department='Admin').all()
+    # epoint_datas = EpointData.query.filter_by(department='Admin').all()
+    epoint_datas = EpointData.query.filter(EpointData.department != 'Question').order_by(text("-id"))
 
     #    flask("Book added successful")
 
