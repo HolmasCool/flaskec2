@@ -187,6 +187,7 @@ def insert_question():
         if answer == '' and department == 'Question':
             openaianswer = ask_ai(question)
             openaiquestion = question.strip()
+            answer = openaianswer
 
     epointData = EpointData(question, answer, department)
     db.session.add(epointData)
