@@ -32,7 +32,9 @@ app.config['SQLACHEMY_TRACK_MODIFICATION'] = os.getenv("SQLACHEMY_TRACK_MODIFICA
 db = SQLAlchemy(app)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.secret_key = "somethingsunique"
+app.secret_key = os.getenv("SECRET_KEY")
+app.permanent_session_lifetime = datetime.timedelta(minutes=10)
+
 # session.init_app(app)
 
 
@@ -113,8 +115,8 @@ def connect():
     scurrentstring = ESSU_id.upper() + nowdt
 
     rgencode = get_webtoken(scurrentstring, password)
-    print(webtoken)
-    print(rgencode)
+    # print(webtoken)
+    # print(rgencode)
     if webtoken == rgencode:
         essusucc_login = True
     else:
@@ -135,8 +137,10 @@ def connect():
                 return redirect(url_for('index', errmsg=errmsg))
 
     if essusucc_login == True:
+        username=''
         print(essusucc_login)
-        session["name"] = request.form.get(request.form.get('User_ID'))
+        session["user"] = request.form.get(request.form.get('User_ID'))
+        username =request.form.get(request.form.get('User_ID'))
         return redirect(url_for('index'))
 
 

@@ -41,7 +41,7 @@
     </form>
 
     <form action="{{url_for('insert_question')}}" method="POST">
-        <h1>Welcome to Epoint AI Chat, I am AI Elien! </h1>
+        <h1>Welcome to Epoint AI Chat, I am your Chat Buddy. </h1>
         <p></p>
 
         <!--        <div class="form-floating mb-3">-->
@@ -70,7 +70,8 @@
                 answer you.</label>
             <textarea class="form-control" name="question" id="question-text" required="1" style="height: 100px">{{openaiquestion}}</textarea>
             <p></p>
-            <button type="submit" class="btn btn-primary">Hi Dear, Elien here click me here to get your answer ('',)
+<!--            <button type="submit" class="btn btn-primary">Hi Dear{{username}}, Elien here click me here to get your answer ('',)-->
+            <button type="submit" class="btn btn-primary">Click here and I will try my best to answer your question.
             </button>
         </div>
 
@@ -101,6 +102,11 @@
         </table>
     </form>
 </div>
+
+<script>
+var myHiddenValue = document.getElementById("ESSU_id").value;
+document.getElementById("myDisplayElement").innerHTML = "The value of the hidden field is: " + myHiddenValue;
+</script>
 
 <script>
     function chkuserid(val) {
